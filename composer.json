@@ -1,0 +1,21 @@
+{
+    "name": "abarbosa/mvc",
+    "description": "Framework de brinquedo",
+    "authors": [
+        {
+            "name": "Alexandre Barbosa",
+            "email": "alxbbarbosa@hotmail.com"
+        }
+    ],
+    "require": {},
+    "autoload" : {
+    	"psr-4" : {
+    		"App\\Controllers\\":"App/Controllers/",
+    		"App\\Models\\":"App/Models/",
+    		"Abbarbosa\\LittleBoy\\Framework\\":"Framework/src/"
+    	},
+        "files" : [
+            "Framework/src/helpers/helpers.php"
+        ]
+    }
+}
