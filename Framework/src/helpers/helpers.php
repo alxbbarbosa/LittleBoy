@@ -10,7 +10,7 @@ use \Abbarbosa\LittleBoy\Framework\Validate;
 /**
  * ==============================================================================================================
  *
- * Helpers: funções auxiliares para contrução de aplicativos
+ * Helpers: funções auxiliares para construção de aplicativos
  *
  * ----------------------------------------------------
  *
