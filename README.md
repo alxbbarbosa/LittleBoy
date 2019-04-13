@@ -1,4 +1,5 @@
 # LittleBoy
+------------------------------------------------------------------------------
 
 LittleBoy foi criado para ser base de artigos para meu blog e até um treinamento que
 está sendo desenvolvido. Ele foi testado mas não está homologado  para ambientes  de
@@ -18,12 +19,7 @@ poderá adionar créditos de atualização.
 
 Framework MVC com muitos recursos: 
 
-Sistema de Roteamento
-Cache
-QueryBuilder  
-Active Record 
-Validations
-Flash messages
+Sistema de Roteamento, Cache, QueryBuilder, Active Record, Validations, Flash messages, etc
 
 
 Alexandre Bezerra Barbosa - 2019 # LittleBoy
