@@ -89,9 +89,8 @@ class Router
         return request()->join($this->route->path);
     }
 
-    public function execute()
+    public function dispatch()
     {
-
         if ($this->route == null) {
             return false;
         }

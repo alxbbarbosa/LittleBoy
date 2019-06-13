@@ -27,6 +27,8 @@ class Controller
 
     protected function view($view_file, $data = null)
     {
-        view($view_file, $data);
+        $result = view($view_file, $data);
+        session()->flush();
+        return $result;
     }
 }

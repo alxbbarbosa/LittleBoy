@@ -23,9 +23,7 @@ class View
     {
 
         $view_file = str_replace('.', '/', $view_file);
-
         $filename = '../views/'.$view_file.'.php';
-
         if (!file_exists($filename)) {
             throw new \Exception("A view não pode ser renderizada. Arquivo <u>{$filename}</u> não encontrado.");
         }
@@ -36,10 +34,13 @@ class View
         if (count($data) > 0) {
             foreach ($data as $k => $v) {
                 ${$k} = $v;
+                
             }
         }
-        require_once $filename;
-        ob_end_flush();
-        session()->flush();
+        require_once($filename);
+        $contents = ob_get_contents();
+        ob_end_clean();
+        
+        return $contents;
     }
 }

@@ -26,7 +26,6 @@ class ContatosController extends Controller
     public function index()
     {
         $contatos = Contato::all();
-
         return view('grade', compact('contatos'));
     }
 
@@ -44,7 +43,6 @@ class ContatosController extends Controller
     public function edit($id)
     {
         $contato = Contato::find($id);
-
         return view('form', compact('contato'));
     }
 
@@ -55,18 +53,16 @@ class ContatosController extends Controller
     {
         $data = request()->validate([
             'nome' => 'required|min:10',
-            'email' => 'email'
+            'email' => 'email',
         ]);
 
         if ($data->fails()) {
             return response()->back(true);
         }
-
         if (Contato::create(request()->all())) {
             return response()->redirect(route('contatos.index'));
-        } else {
-            return response()->back(true);
         }
+        return response()->back(true);
     }
 
     /**
@@ -76,16 +72,18 @@ class ContatosController extends Controller
     {
         $data = request()->validate([
             'nome' => 'required|min:10',
-            'email' => 'email'
+            'email' => 'email',
         ]);
 
         if ($data->fails()) {
             return response()->back(true);
         }
 
-        if (Contato::where('id', $id)->update($data->all())) {
+        if ( Contato::where('id', $id)->update($data->all()) ) {
             return response()->redirect(route('contatos.index'));
         }
+        return response()->back(true);
+
     }
 
     /**
@@ -95,8 +93,7 @@ class ContatosController extends Controller
     {
         if (Contato::destroy($id)) {
             return response()->redirect(route('contatos.index'));
-        } else {
-            return response()->back(true);
         }
+        return response()->back(true);
     }
 }

@@ -19,8 +19,10 @@ $cache->caching();
     <body>
         <?php
         $request = request();
+        $app = new \Abbarbosa\LittleBoy\Framework\App($request);
+        $app->find()->send();
 
-        router($request, $request->method())->execute();
+
         ?>
     </body>
 </html>

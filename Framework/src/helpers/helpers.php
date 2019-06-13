@@ -54,16 +54,15 @@ function route($name)
 function router($uri = null, $method = 'get')
 {
     $router = new Router();
-
     if ($uri) {
         return $router->find($method, $uri);
     }
     return $router;
 }
 
-function response()
+function response($content = '', $status = 200, $headers = [], $charset = 'UTF-8')
 {
-    return new Response;
+    return new Response($content, $status, $headers, $charset);
 }
 
 function session()
