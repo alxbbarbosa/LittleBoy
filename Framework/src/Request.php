@@ -1,4 +1,5 @@
 <?php
+
 namespace Abbarbosa\LittleBoy\Framework;
 
 use Abbarbosa\LittleBoy\Framework\File;
@@ -26,7 +27,7 @@ class Request
     protected $base;
     protected $method;
     protected $files;
-    
+
     public function __construct()
     {
         $this->protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
@@ -38,80 +39,92 @@ class Request
         $this->uri = implode('/', array_diff($uri, $script));
         $this->method = $_SERVER['REQUEST_METHOD'];
 
-        if(count($_FILES) > 0) {
+        if (count($_FILES) > 0) {
             $this->setFiles();
         }
     }
 
-    protected function sefFiles() {
+    protected function setFiles()
+    {
         foreach ($_FILES as $key => $value) {
 
             $this->files[$key] = new File($key);
         }
     }
-    
-    public function setRequest($key, $value) {
+
+    public function setRequest($key, $value)
+    {
         $this->request[$key] = $value;
     }
 
 
-    public function base(){
+    public function base()
+    {
         return $this->base;
     }
 
-    public function url(){
-        return $this->protocol . '://' . $this->host .$this->base;
+    public function url()
+    {
+        return $this->protocol . '://' . $this->host . $this->base;
     }
 
-    public function uriAsString(){
+    public function uriAsString()
+    {
         return $this->uri;
     }
 
-    public function uri(){
+    public function uri()
+    {
         return explode('/', $this->uri);
     }
 
-    public function method(){
+    public function method()
+    {
         return strtolower($this->method);
     }
 
-    public function join(string $uri){
+    public function join(string $uri)
+    {
 
         $uri = implode('/', explode('/', $uri));
 
         return $this->url() . $uri;
     }
 
-    public function validate($validation) {
+    public function validate($validation)
+    {
 
         $this->validate = validate()->set($validation);
         return $this;
     }
 
-    public function fails(){
+    public function fails()
+    {
         return !$this->validate;
     }
 
-    public function all(){
-        switch(strtolower($this->method)){
+    public function all()
+    {
+        switch (strtolower($this->method)) {
             case 'post':
-            return (object) $_POST;
+                return (object) $_POST;
             case 'get':
-            return (object) $_GET;
+                return (object) $_GET;
         }
     }
 
-    public function only($args){
+    public function only($args)
+    {
 
         $args = func_get_args();
 
-        if(count($args) > 0) {
+        if (count($args) > 0) {
 
             $result = [];
 
             foreach ((array) $this->all() as $key => $value) {
-                if(in_array($key, $args)) {
-                    $result[$key] = $value; 
+                if (in_array($key, $args)) {
+                    $result[$key] = $value;
                 }
             }
             return (object) $result;
@@ -119,39 +132,44 @@ class Request
     }
 
 
-    public function except($args){
+    public function except($args)
+    {
 
         $args = func_get_args();
 
-        if(count($args) > 0) {
+        if (count($args) > 0) {
 
             $result = [];
 
             foreach ((array) $this->all() as $key => $value) {
-                if(!in_array($key, $args)) {
-                    $result[$key] = $value; 
+                if (!in_array($key, $args)) {
+                    $result[$key] = $value;
                 }
             }
             return (object) $result;
         }
     }
 
-    public function hasFile($key) {
+    public function hasFile($key)
+    {
         return isset($this->file[$key]);
     }
 
-    public function file($key) {
-        if($this->hasFile($key)) {
+    public function file($key)
+    {
+        if ($this->hasFile($key)) {
             return $this->file[$key];
         }
     }
 
 
-    public function has($key) {
+    public function has($key)
+    {
         return isset($this->request[$key]);
     }
 
-    public function get($key) {
+    public function get($key)
+    {
         if (isset($this->request[$key])) {
             return $this->request[$key];
         }
